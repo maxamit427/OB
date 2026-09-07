@@ -13,20 +13,28 @@ function prepareVercelApp() {
 
       const distPath = path.resolve(process.cwd(), "dist/public");
       const indexPath = path.join(distPath, "index.html");
+
       if (!fs.existsSync(indexPath)) {
-        throw new Error("Frontend build not found. Run npm run build before deploying.");
+        throw new Error(
+          "Frontend build not found. Run npm run build before deploying."
+        );
       }
 
       app.use(express.static(distPath));
-      app.use("*", (_req, res) => {
+
+      app.use((_req, res) => {
         res.sendFile(indexPath);
       });
     })();
   }
+
   return ready;
 }
 
-export default async function handler(req: Request, res: Response) {
+export default async function handler(
+  req: Request,
+  res: Response
+) {
   await prepareVercelApp();
   return app(req, res);
 }
