@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Local override files (not tracked)
+.env
+.env.*
+!.env.example
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor / OS
+.DS_Store
+.vscode/
+*.swp
+*.swo
+
+# Replit internal
+.replit.nix
+.cache/

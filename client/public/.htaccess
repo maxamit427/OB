@@ -1,0 +1,37 @@
+# Apache / LiteSpeed / cPanel — SPA routing fallback
+# All requests that don't match a real file or directory
+# are rewritten to index.html so the React router can handle them.
+
+Options -MultiViews
+RewriteEngine On
+
+# Allow cross-origin font requests
+<IfModule mod_headers.c>
+  <FilesMatch "\.(ttf|ttc|otf|eot|woff|woff2|font\.css|css)$">
+    Header add Access-Control-Allow-Origin "*"
+  </FilesMatch>
+</IfModule>
+
+# Cache static assets aggressively
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/png          "access plus 1 year"
+  ExpiresByType image/jpeg         "access plus 1 year"
+  ExpiresByType image/webp         "access plus 1 year"
+  ExpiresByType image/svg+xml      "access plus 1 year"
+  ExpiresByType image/x-icon       "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType text/css           "access plus 1 year"
+  ExpiresByType audio/mpeg         "access plus 1 year"
+  ExpiresByType font/woff2         "access plus 1 year"
+</IfModule>
+
+# Compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json
+</IfModule>
+
+# SPA fallback: if no real file/dir matched, serve index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [L]

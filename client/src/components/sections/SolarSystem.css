@@ -1,0 +1,252 @@
+/* Scoped to .solar-system-hero — mirrors SolarSystemBackground.css fixes */
+.solar-system-hero {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  overflow: hidden;
+  position: relative;
+}
+
+.solar-system-hero .container {
+  font-size: 6px;
+  width: 40em;
+  height: 40em;
+  position: relative;
+  overflow: visible;
+}
+
+.solar-system-hero .sun img {
+  height: 130%;
+  width: 130%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.solar-system-hero .sun {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 15em;
+  left: 15em;
+  width: 10em;
+  height: 10em;
+  border-radius: 50%;
+  box-shadow: 0 0 3em rgb(255, 128, 0);
+  animation: orbit 50s linear infinite;
+}
+
+/* ── Orbit rings ─────────────────────────────────────────────── */
+.solar-system-hero .mercury,
+.solar-system-hero .venus,
+.solar-system-hero .earth,
+.solar-system-hero .moon,
+.solar-system-hero .mars,
+.solar-system-hero .jupiter,
+.solar-system-hero .saturn,
+.solar-system-hero .uranus,
+.solar-system-hero .neptune,
+.solar-system-hero .pluto,
+.solar-system-hero .planet-x {
+  position: absolute;
+  border-style: solid;
+  border-color: rgba(255,255,255,0.25) transparent transparent transparent;
+  border-width: 0.1em 0.1em 0 0;
+  border-radius: 50%;
+}
+
+.solar-system-hero .mercury {
+  top: 12.5em;
+  left: 12.5em;
+  width: 15em;
+  height: 15em;
+  animation: orbit 68.7s linear infinite;
+}
+
+.solar-system-hero .venus {
+  top: 10em;
+  left: 10em;
+  width: 20em;
+  height: 20em;
+  animation: orbit 48.7s linear infinite;
+}
+
+.solar-system-hero .earth {
+  top: 6em;
+  left: 6em;
+  width: 28em;
+  height: 28em;
+  animation: orbit 36.5s linear infinite;
+}
+
+.solar-system-hero .moon {
+  top: 2em;
+  right: -1em;
+  width: 7em;
+  height: 7em;
+  animation: orbit 2.7s linear infinite;
+}
+
+.solar-system-hero .mars {
+  top: 2em;
+  left: 2em;
+  width: 36em;
+  height: 36em;
+  animation: orbit 26.5s linear infinite;
+}
+
+.solar-system-hero .jupiter {
+  top: -2.5em;
+  left: -2.5em;
+  width: 45em;
+  height: 45em;
+  animation: orbit 21s linear infinite;
+}
+
+.solar-system-hero .saturn {
+  top: -7.5em;
+  left: -7.5em;
+  width: 55em;
+  height: 55em;
+  animation: orbit 17s linear infinite;
+}
+
+.solar-system-hero .uranus {
+  top: -12.5em;
+  left: -12.5em;
+  width: 65em;
+  height: 65em;
+  animation: orbit 19s linear infinite;
+}
+
+.solar-system-hero .neptune {
+  top: -17.5em;
+  left: -17.5em;
+  width: 75em;
+  height: 75em;
+  animation: orbit 15s linear infinite;
+}
+
+.solar-system-hero .pluto {
+  top: -22.5em;
+  left: -22.5em;
+  width: 85em;
+  height: 85em;
+  animation: orbit 18s linear infinite;
+}
+
+.solar-system-hero .planet-x {
+  top: -27.5em;
+  left: -27.5em;
+  width: 95em;
+  height: 95em;
+  animation: orbit 22s linear infinite;
+}
+
+/* ── Planet images (::before) ─────────────────────────────────── */
+.solar-system-hero .mercury::before,
+.solar-system-hero .venus::before,
+.solar-system-hero .earth::before,
+.solar-system-hero .moon::before,
+.solar-system-hero .mars::before,
+.solar-system-hero .jupiter::before,
+.solar-system-hero .saturn::before,
+.solar-system-hero .uranus::before,
+.solar-system-hero .neptune::before,
+.solar-system-hero .pluto::before,
+.solar-system-hero .planet-x::before {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.solar-system-hero .mercury::before {
+  top: 1.5em; right: 0.8em; width: 2em; height: 2em;
+  background-image: url('/images/mercury.png');
+  animation: orbit 68.7s linear infinite reverse;
+}
+
+.solar-system-hero .venus::before {
+  top: 2em; right: 2em; width: 2em; height: 2em;
+  background-image: url('/images/venus.png');
+  animation: orbit 48.7s linear infinite reverse;
+}
+
+.solar-system-hero .earth::before {
+  top: 3em; right: 0em; width: 5em; height: 5em;
+  background-image: url('/images/earth.png');
+  animation: orbit 36.5s linear infinite reverse;
+}
+
+.solar-system-hero .moon::before {
+  top: 0.8em; right: 0.2em; width: 1.2em; height: 1.2em;
+  background-image: url('/images/moon.png');
+  animation: orbit 2.7s linear infinite reverse;
+}
+
+.solar-system-hero .mars::before {
+  top: 5em; right: 3em; width: 3em; height: 3em;
+  background-image: url('/images/mars.png');
+  animation: orbit 26.5s linear infinite reverse;
+}
+
+.solar-system-hero .jupiter::before {
+  top: 6em; right: 3em; width: 5em; height: 5em;
+  background-image: url('/images/jupiter.png');
+  animation: orbit 21s linear infinite reverse;
+}
+
+.solar-system-hero .saturn::before {
+  top: 7.5em; right: 5em; width: 4.5em; height: 4.5em;
+  background-image: url('/images/saturn.png');
+  animation: orbit 17s linear infinite reverse;
+}
+
+.solar-system-hero .uranus::before {
+  top: 9em; right: 6.5em; width: 4em; height: 4em;
+  background-image: url('/images/uranus.png');
+  animation: orbit 19s linear infinite reverse;
+}
+
+.solar-system-hero .neptune::before {
+  top: 10em; right: 8em; width: 4em; height: 4em;
+  background-image: url('/images/neptune.png');
+  animation: orbit 15s linear infinite reverse;
+}
+
+.solar-system-hero .pluto::before {
+  top: 11em; right: 10em; width: 4em; height: 4em;
+  background-image: url('/images/pluto.png');
+  animation: orbit 18s linear infinite reverse;
+}
+
+/* Planet-X — CSS gradient replaces the broken low-quality PNG */
+.solar-system-hero .planet-x::before {
+  top: 11.7em; right: 11.7em; width: 5em; height: 5em;
+  background-image: radial-gradient(circle at 38% 35%,
+    #c084fc,
+    #7c3aed 45%,
+    #3b0764 75%,
+    #0d0020
+  );
+  box-shadow: 0 0 0.8em rgba(192, 132, 252, 0.6),
+              0 0 2em rgba(124, 58, 237, 0.3);
+  animation: orbit 22s linear infinite reverse;
+}
+
+.solar-system-hero .star {
+  position: absolute;
+  background-color: white;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+@keyframes orbit {
+  to { transform: rotate(360deg); }
+}

@@ -1,0 +1,308 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "Inter", sans-serif;
+  --font-heading: "Space Grotesk", sans-serif;
+  --font-tech: "Rajdhani", sans-serif;
+
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-glow: glow 2s ease-in-out infinite alternate;
+  
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  @keyframes glow {
+    from { box-shadow: 0 0 10px -10px var(--color-primary); }
+    to { box-shadow: 0 0 20px 5px var(--color-primary); }
+  }
+}
+
+/* Deep Blue / Web3 Theme */
+:root {
+  /* Dark, Deep Space Blue Background */
+  --background: 240 30% 6%; /* #0b0b14 roughly */
+  --foreground: 210 40% 98%; /* White-ish */
+
+  /* Soft Purple Primary */
+  --primary: 265 80% 60%;
+  --primary-foreground: 210 40% 98%;
+
+  /* Cyan/Neon Secondary */
+  --secondary: 190 90% 50%;
+  --secondary-foreground: 240 30% 10%;
+
+  /* Darker Card Backgrounds */
+  --card: 240 25% 10%;
+  --card-foreground: 210 40% 98%;
+
+  /* Subtle Borders */
+  --border: 240 20% 20%;
+  --input: 240 20% 20%;
+  
+  --muted: 240 20% 20%;
+  --muted-foreground: 240 10% 70%;
+
+  --accent: 320 80% 60%; /* Pink accent */
+  --accent-foreground: 210 40% 98%;
+
+  --radius: 0.75rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply font-sans antialiased bg-background text-foreground selection:bg-primary/30 selection:text-primary-foreground;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-bold tracking-tight;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-black/20 border border-white/10;
+  }
+  .glass-card {
+    @apply bg-card/40 border border-white/5 hover:border-primary/30 transition-colors duration-300;
+  }
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-linear-to-r from-white via-primary to-secondary;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted));
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary));
+}
+
+button,
+a,
+[role="button"],
+[role="tab"],
+[role="menuitem"],
+[role="option"],
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+label[for],
+.cursor-pointer {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Keep touch feedback quiet and physical. The old global glow/scale animation
+   made every admin click feel like a game button. */
+#admin-root button:active,
+#admin-root a:active,
+#admin-root [role="button"]:active,
+#admin-root [role="tab"]:active,
+#admin-root [role="menuitem"]:active,
+#admin-root .cursor-pointer:active {
+  transform: translateY(1px);
+}
+
+/* ── Admin panel ambient blob animations (CSS — compositor thread) ──────── */
+@keyframes adminBlob1 {
+  0%, 100% { transform: translate(0,    0)    scale(1);    }
+  33%       { transform: translate(50px, -40px) scale(1.12); }
+  66%       { transform: translate(20px, -20px) scale(0.96); }
+}
+@keyframes adminBlob2 {
+  0%, 100% { transform: translate(0,    0)   scale(1);    }
+  40%       { transform: translate(-35px, 55px) scale(0.88); }
+  70%       { transform: translate(-15px, 25px) scale(1.05); }
+}
+@keyframes adminBlob3 {
+  0%, 100% { transform: translate(0,    0)   scale(1);    }
+  50%       { transform: translate(28px, 32px) scale(1.08); }
+}
+
+/* ── Admin panel custom scrollbar ─────────────────────────────────────────── */
+.admin-scroll::-webkit-scrollbar { width: 4px; height: 4px; }
+.admin-scroll::-webkit-scrollbar-track { background: transparent; }
+.admin-scroll::-webkit-scrollbar-thumb { background: rgba(6,182,212,0.2); border-radius: 2px; }
+.admin-scroll::-webkit-scrollbar-thumb:hover { background: rgba(6,182,212,0.45); }
+
+/* ── Gradient border animation ────────────────────────────────────────────── */
+@keyframes gradientBorder {
+  0%   { background-position: 0%   50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
+}
+
+/* ── Scan line animation ──────────────────────────────────────────────────── */
+@keyframes scanLine {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+/* ── Number counter animation ────────────────────────────────────────────── */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Pulse ring ───────────────────────────────────────────────────────────── */
+@keyframes pulseRing {
+  0%   { transform: scale(0.8); opacity: 0.8; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* ── Admin HUD atmosphere ─────────────────────────────────────────────────── */
+.admin-surface-effects {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.9;
+}
+
+.admin-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.32;
+  background-image:
+    linear-gradient(rgba(6, 182, 212, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(6, 182, 212, 0.045) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse at 65% 40%, black 0%, transparent 72%);
+}
+
+.admin-orbit {
+  position: absolute;
+  right: -12%;
+  top: 7%;
+  width: min(62vw, 760px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(6, 182, 212, 0.08);
+  border-radius: 50%;
+  transform: rotate(-24deg) scaleY(0.36);
+  box-shadow: 0 0 80px rgba(6, 182, 212, 0.035);
+}
+
+.admin-orbit::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 22%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #06b6d4;
+  box-shadow: 0 0 18px 5px rgba(6, 182, 212, 0.45);
+}
+
+.admin-orbit-a {
+  animation: adminOrbitA 24s linear infinite;
+}
+
+.admin-orbit-b {
+  right: -18%;
+  top: 16%;
+  width: min(52vw, 620px);
+  border-color: rgba(139, 92, 246, 0.075);
+  transform: rotate(30deg) scaleY(0.28);
+  animation: adminOrbitB 31s linear infinite reverse;
+}
+
+.admin-orbit-b::after {
+  left: auto;
+  right: 15%;
+  background: #8b5cf6;
+  box-shadow: 0 0 18px 5px rgba(139, 92, 246, 0.42);
+}
+
+.admin-scanline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 18vh;
+  opacity: 0.12;
+  background: linear-gradient(180deg, transparent, rgba(6, 182, 212, 0.14), transparent);
+  transform: translateY(-120%);
+  animation: adminScanline 14s ease-in-out infinite;
+}
+
+.admin-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 55% 45%, transparent 20%, rgba(0, 0, 0, 0.18) 100%);
+}
+
+.admin-dashboard-grid {
+  background-image:
+    linear-gradient(rgba(6, 182, 212, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(6, 182, 212, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), transparent 85%);
+}
+
+@keyframes adminOrbitA {
+  from { transform: rotate(-24deg) scaleY(0.36); }
+  to { transform: rotate(336deg) scaleY(0.36); }
+}
+
+@keyframes adminOrbitB {
+  from { transform: rotate(30deg) scaleY(0.28); }
+  to { transform: rotate(-330deg) scaleY(0.28); }
+}
+
+@keyframes adminScanline {
+  0%, 15% { transform: translateY(-120%); }
+  60%, 100% { transform: translateY(620%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-orbit-a,
+  .admin-orbit-b,
+  .admin-scanline,
+  .adminBlob1,
+  .adminBlob2,
+  .adminBlob3,
+  .admin-dashboard-grid {
+    animation: none !important;
+  }
+}
