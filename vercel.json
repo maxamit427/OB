@@ -3,11 +3,17 @@
   "buildCommand": "npm run build",
   "functions": {
     "api/index.ts": {
-      "includeFiles": ["dist/public/**", "config/google/client-id.json"]
+      "includeFiles": "dist/public/**"
     }
   },
   "rewrites": [
-    { "source": "/api/:path*", "destination": "/api/index.ts" },
-    { "source": "/(.*)", "destination": "/api/index.ts" }
+    {
+      "source": "/api/:path*",
+      "destination": "/api/index.ts"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/api/index.ts"
+    }
   ]
 }
